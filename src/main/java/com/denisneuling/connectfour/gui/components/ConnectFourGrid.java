@@ -81,7 +81,7 @@ public class ConnectFourGrid extends JPanel implements InitializingBean {
 		layout = new MigLayout(String.format("wrap %d", horizontal));
 		this.setLayout(layout);
 
-		for (int y = vertical; y > 0; y--) {
+		for (int y = vertical-1; y >= 0; y--) {
 			for (int x = 0; x < horizontal; x++) {
 				Tile tile = new Tile(x,y,tileHorizontal,tileVertical);
 				gridService.register(tile);
