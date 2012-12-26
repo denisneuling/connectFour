@@ -9,6 +9,12 @@ import com.denisneuling.connectfour.gui.components.GameDialog;
 import com.denisneuling.connectfour.gui.components.MenuPanel;
 
 @Component
+/**
+ * <p>GameMenuItemListener class.</p>
+ *
+ * @author ska
+ * @version $Id: $Id
+ */
 public class GameMenuItemListener extends BaseMenuItemListener{
 
 	@Autowired
@@ -17,6 +23,7 @@ public class GameMenuItemListener extends BaseMenuItemListener{
 	@Autowired
 	private MenuPanel menuPanel;
 	
+	/** {@inheritDoc} */
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		menuPanel.disableItems();

@@ -13,6 +13,12 @@ import com.denisneuling.connectfour.gui.components.Tile;
 import com.denisneuling.connectfour.gui.components.WinDialog;
 
 @Service
+/**
+ * <p>GridService class.</p>
+ *
+ * @author ska
+ * @version $Id: $Id
+ */
 public class GridService {
 	protected Logger log = Logger.getLogger(this.getClass());
 
@@ -24,14 +30,28 @@ public class GridService {
 
 	private volatile Tile[][] matrix;
 
+	/**
+	 * <p>clean.</p>
+	 */
 	public void clean() {
 
 	}
 
+	/**
+	 * <p>build.</p>
+	 *
+	 * @param x a int.
+	 * @param y a int.
+	 */
 	public void build(int x, int y) {
 		matrix = new Tile[x][y];
 	}
 
+	/**
+	 * <p>register.</p>
+	 *
+	 * @param tile a {@link com.denisneuling.connectfour.gui.components.Tile} object.
+	 */
 	public void register(Tile tile) {
 		if (tile != null) {
 			log.debug("Registering tile "+tile);
@@ -41,6 +61,11 @@ public class GridService {
 
 	}
 
+	/**
+	 * <p>clicked.</p>
+	 *
+	 * @param tile a {@link com.denisneuling.connectfour.gui.components.Tile} object.
+	 */
 	public void clicked(Tile tile) {
 		log.info(tile);
 		boolean valid = false;

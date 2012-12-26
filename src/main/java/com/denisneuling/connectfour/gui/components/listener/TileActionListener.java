@@ -11,12 +11,19 @@ import com.denisneuling.connectfour.gui.components.Tile;
 import com.denisneuling.connectfour.service.GridService;
 
 @Component
+/**
+ * <p>TileActionListener class.</p>
+ *
+ * @author ska
+ * @version $Id: $Id
+ */
 public class TileActionListener implements MouseListener{
 	Logger log = Logger.getLogger(this.getClass());
 
 	@Autowired
 	private GridService gridService;
 	
+	/** {@inheritDoc} */
 	@Override
 	public void mouseClicked(MouseEvent arg0) {
 		log.debug("Mouse clicked");
@@ -28,21 +35,25 @@ public class TileActionListener implements MouseListener{
 		}
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void mouseEntered(MouseEvent arg0) {
 		log.debug("Mouse entered");
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void mouseExited(MouseEvent arg0) {
 		log.debug("Mouse exited");
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void mousePressed(MouseEvent arg0) {
 		log.debug("Mouse pressed");
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void mouseReleased(MouseEvent arg0) {
 		log.debug("Mouse released");

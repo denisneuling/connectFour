@@ -14,6 +14,12 @@ import com.denisneuling.connectfour.gui.components.listener.GameMenuItemListener
 import com.denisneuling.connectfour.gui.components.listener.QuitMenuItemListener;
 
 @Component
+/**
+ * <p>MenuPanel class.</p>
+ *
+ * @author ska
+ * @version $Id: $Id
+ */
 public class MenuPanel extends JMenuBar implements InitializingBean {
 	private static final long serialVersionUID = -8033351688374778735L;
 	protected Logger log = Logger.getLogger(this.getClass());
@@ -34,9 +40,13 @@ public class MenuPanel extends JMenuBar implements InitializingBean {
 	private JMenuItem quitItem;
 	private JMenuItem gameItem;
 	
+	/**
+	 * <p>Constructor for MenuPanel.</p>
+	 */
 	public MenuPanel(){
 	}	
 	
+	/** {@inheritDoc} */
 	@Override
 	public void afterPropertiesSet() throws Exception {
 		this.removeAll();
@@ -55,11 +65,17 @@ public class MenuPanel extends JMenuBar implements InitializingBean {
 		this.setVisible(true);
 	}
 	
+	/**
+	 * <p>disableItems.</p>
+	 */
 	public void disableItems(){
 		quitItem.setEnabled(false);
 		gameItem.setEnabled(false);
 	}
 	
+	/**
+	 * <p>enableItems.</p>
+	 */
 	public void enableItems(){
 		quitItem.setEnabled(true);
 		gameItem.setEnabled(true);

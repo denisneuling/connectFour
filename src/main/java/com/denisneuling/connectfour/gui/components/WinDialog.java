@@ -20,6 +20,12 @@ import com.denisneuling.connectfour.common.Player;
 import com.denisneuling.connectfour.gui.MainFrame;
 
 @Component
+/**
+ * <p>WinDialog class.</p>
+ *
+ * @author ska
+ * @version $Id: $Id
+ */
 public class WinDialog extends JDialog implements WindowListener, ActionListener, InitializingBean {
 	private static final long serialVersionUID = 4621566363518596409L;
 	protected Logger log = Logger.getLogger(this.getClass());
@@ -71,16 +77,25 @@ public class WinDialog extends JDialog implements WindowListener, ActionListener
 		log.debug("Window opened");
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void afterPropertiesSet() throws Exception {
 		this.addWindowListener(this);
 	}
 	
+	/**
+	 * <p>Constructor for WinDialog.</p>
+	 */
 	public WinDialog(){
 		layout = new MigLayout("fillx,insets 0");
 		this.setLayout(layout);
 	}
 	
+	/**
+	 * <p>notifyWinner.</p>
+	 *
+	 * @param player a {@link com.denisneuling.connectfour.common.Player} object.
+	 */
 	public void notifyWinner(Player player){
 		this.setTitle("Victory!");
 		
@@ -99,6 +114,7 @@ public class WinDialog extends JDialog implements WindowListener, ActionListener
 		this.setVisible(true);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
 		this.setVisible(false);

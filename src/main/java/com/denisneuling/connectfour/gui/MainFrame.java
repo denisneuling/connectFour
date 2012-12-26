@@ -44,6 +44,9 @@ public class MainFrame extends JFrame implements InitializingBean, WindowListene
 		addWindowListener(this);
 	}
 	
+	/**
+	 * <p>die.</p>
+	 */
 	public void die(){
 		try{
 			log.info("Closing applicationContext.");

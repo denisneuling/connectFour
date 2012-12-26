@@ -8,11 +8,18 @@ import org.springframework.stereotype.Component;
 import com.denisneuling.connectfour.gui.MainFrame;
 
 @Component
+/**
+ * <p>QuitMenuItemListener class.</p>
+ *
+ * @author ska
+ * @version $Id: $Id
+ */
 public class QuitMenuItemListener extends BaseMenuItemListener {
 
 	@Autowired
 	private MainFrame mainFrame;
 	
+	/** {@inheritDoc} */
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		mainFrame.setVisible(false);

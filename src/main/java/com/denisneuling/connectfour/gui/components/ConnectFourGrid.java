@@ -13,6 +13,12 @@ import com.denisneuling.connectfour.gui.components.listener.TileActionListener;
 import com.denisneuling.connectfour.service.GridService;
 
 @Component
+/**
+ * <p>ConnectFourGrid class.</p>
+ *
+ * @author ska
+ * @version $Id: $Id
+ */
 public class ConnectFourGrid extends JPanel implements InitializingBean {
 	private static final long serialVersionUID = 4883973788405021695L;
 
@@ -42,22 +48,43 @@ public class ConnectFourGrid extends JPanel implements InitializingBean {
 	private volatile int tileHorizontal;
 	private volatile int tileVertical;
 
+	/**
+	 * <p>Getter for the field <code>horizontal</code>.</p>
+	 *
+	 * @return a int.
+	 */
 	public int getHorizontal() {
 		return horizontal;
 	}
 
+	/**
+	 * <p>Setter for the field <code>horizontal</code>.</p>
+	 *
+	 * @param horizontal a int.
+	 */
 	public void setHorizontal(int horizontal) {
 		this.horizontal = horizontal;
 	}
 
+	/**
+	 * <p>Getter for the field <code>vertical</code>.</p>
+	 *
+	 * @return a int.
+	 */
 	public int getVertical() {
 		return vertical;
 	}
 
+	/**
+	 * <p>Setter for the field <code>vertical</code>.</p>
+	 *
+	 * @param vertical a int.
+	 */
 	public void setVertical(int vertical) {
 		this.vertical = vertical;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void afterPropertiesSet() throws Exception {
 		horizontal = Integer.parseInt(defaultXString);
@@ -70,11 +97,17 @@ public class ConnectFourGrid extends JPanel implements InitializingBean {
 		this.setVisible(true);
 	}
 
+	/**
+	 * <p>clean.</p>
+	 */
 	public void clean() {
 		this.removeAll();
 		gridService.clean();
 	}
 
+	/**
+	 * <p>build.</p>
+	 */
 	public void build() {
 		gridService.build(horizontal, vertical);
 
@@ -91,6 +124,9 @@ public class ConnectFourGrid extends JPanel implements InitializingBean {
 		}
 	}
 
+	/**
+	 * <p>rebuild.</p>
+	 */
 	public void rebuild() {
 		clean();
 		build();

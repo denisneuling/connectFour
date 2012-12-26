@@ -41,6 +41,9 @@ public class GameDialog extends JDialog implements WindowListener, InitializingB
 	private JTextField xAxis;
 	private JTextField yAxis;
 	
+	/**
+	 * <p>Constructor for GameDialog.</p>
+	 */
 	public GameDialog(){
 		this.setTitle("New Game");
 		this.setSize(new Dimension(350,125));
@@ -118,6 +121,7 @@ public class GameDialog extends JDialog implements WindowListener, InitializingB
 		log.debug("Window opened");
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void afterPropertiesSet() throws Exception {
 		this.addWindowListener(this);
