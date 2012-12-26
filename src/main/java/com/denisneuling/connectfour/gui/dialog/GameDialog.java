@@ -145,6 +145,7 @@ public class GameDialog extends JDialog implements WindowListener, ActionListene
 		this.addWindowListener(this);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
 		log.info(arg0.toString());

@@ -61,10 +61,16 @@ public class TileActionListener implements MouseListener{
 		log.debug("Mouse released");
 	}
 
+	/**
+	 * <p>enable.</p>
+	 */
 	public void enable() {
 		this.enabled = true;
 	}
 
+	/**
+	 * <p>disable.</p>
+	 */
 	public void disable() {
 		this.enabled = false;
 	}

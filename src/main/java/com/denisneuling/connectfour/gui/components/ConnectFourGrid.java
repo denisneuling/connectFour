@@ -102,6 +102,12 @@ public class ConnectFourGrid extends JPanel implements InitializingBean {
 		this.setVisible(true);
 	}
 
+	/**
+	 * <p>renew.</p>
+	 *
+	 * @param horizontal a int.
+	 * @param vertical a int.
+	 */
 	public void renew(int horizontal, int vertical) {
 		this.horizontal = horizontal;
 		this.vertical = vertical;
