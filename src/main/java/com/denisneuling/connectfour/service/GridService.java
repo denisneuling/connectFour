@@ -1,15 +1,12 @@
 package com.denisneuling.connectfour.service;
 
-import java.awt.Color;
-
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import sun.net.www.content.text.plain;
-
 import com.denisneuling.connectfour.common.Player;
 import com.denisneuling.connectfour.gui.components.Tile;
+import com.denisneuling.connectfour.gui.components.listener.TileActionListener;
 import com.denisneuling.connectfour.gui.dialog.WinDialog;
 
 @Service
@@ -23,19 +20,17 @@ public class GridService {
 	protected Logger log = Logger.getLogger(this.getClass());
 
 	@Autowired
-	private DecisionService decisionService;
+	private PlayerService playerService;
 	
 	@Autowired
 	private WinDialog winDialog;
+	
+	@Autowired
+	private TileActionListener tileActionListener;
 
 	private volatile Tile[][] matrix;
-
-	/**
-	 * <p>clean.</p>
-	 */
-	public void clean() {
-
-	}
+	private volatile int tiles;
+	private volatile int clickCount = 0;
 
 	/**
 	 * <p>build.</p>
@@ -45,6 +40,8 @@ public class GridService {
 	 */
 	public void build(int x, int y) {
 		matrix = new Tile[x][y];
+		clickCount = 0;
+		tiles = x*y;
 	}
 
 	/**
@@ -73,7 +70,7 @@ public class GridService {
 		for (int i = 0; i < matrix[tile.getRow()].length; i++) {
 			if (matrix[tile.getRow()][i].getPlayer() == null) {
 				log.info(tile.getRow() + " " + matrix[tile.getRow()][i] + " " + matrix[tile.getRow()][i].getPlayer());
-				Player player = decisionService.getCurrentPlayer();
+				Player player = playerService.getCurrentPlayer();
 				matrix[tile.getRow()][i].setPlayer(player);
 				matrix[tile.getRow()][i].setBackground(player.getColor());
 				valid = true;
@@ -81,10 +78,18 @@ public class GridService {
 			}
 		}
 		if (valid) {
+			clickCount ++;
+
 			Player winner = check4();
 			if (winner == null) {
-				decisionService.nextPlayer();
+				
+				if(clickCount >= tiles){
+					winDialog.notifyWinner(null);
+				}else{
+					playerService.nextPlayer();
+				}
 			} else {
+				tileActionListener.disable();
 				winDialog.notifyWinner(winner);
 			}
 		}

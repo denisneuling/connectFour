@@ -6,8 +6,10 @@ import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 
+import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
 
 import net.miginfocom.swing.MigLayout;
 
@@ -33,7 +35,12 @@ public class WinDialog extends JDialog implements WindowListener, ActionListener
 	@Autowired
 	private MainFrame mainFrame;
 	
+	@Autowired
+	private GameDialog gameDialog;
+	
 	private MigLayout layout;
+	
+	private JButton okButton;
 	
 	/** {@inheritDoc} */
 	@Override
@@ -87,7 +94,7 @@ public class WinDialog extends JDialog implements WindowListener, ActionListener
 	 * <p>Constructor for WinDialog.</p>
 	 */
 	public WinDialog(){
-		layout = new MigLayout("fillx,insets 0");
+		setLayout(new MigLayout("fill"));
 		this.setLayout(layout);
 	}
 	
@@ -97,20 +104,32 @@ public class WinDialog extends JDialog implements WindowListener, ActionListener
 	 * @param player a {@link com.denisneuling.connectfour.common.Player} object.
 	 */
 	public void notifyWinner(Player player){
-		this.setTitle("Victory!");
+		String content = "";
 		
-		// TODO fix remove all otherwise after second game the win dialog is whacked
-//		this.removeAll();
-		
-		String content = "<html><h1>Congratulations!</h1><br>"+player.getName()+"<br>has beaten you in this match.</html>";
+		if(player == null){
+			this.setTitle("Stalemate!");
+			content = "<html><h1>You are Stalemates!</h1><br>You both won this game.<br></html>";
+
+		}else{
+			this.setTitle("Victory!");
+			content = "<html><h1>Congratulations!</h1><br>"+player.getName()+"<br>has beaten you in this match.<br></html>";
+		}
 		
 		JLabel text = new JLabel();
 		text.setText(content);
-		
 		this.add(text);
-		this.setSize(new Dimension(300, 140));
-		this.setResizable(false);
 		
+		JPanel buttonPanel = new JPanel(new MigLayout("fillx,insets 0"));
+		
+		//Ok button
+		okButton = new JButton("Ok");
+		okButton.setMnemonic('O');
+		okButton.addActionListener(this);
+		buttonPanel.add(okButton, "split,right,width 100!");
+		this.add(buttonPanel, "");
+		
+		this.setSize(new Dimension(350,125));
+		this.setResizable(false);
 		this.setVisible(true);
 	}
 
@@ -118,5 +137,7 @@ public class WinDialog extends JDialog implements WindowListener, ActionListener
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
 		this.setVisible(false);
+		
+		gameDialog.setVisible(true);
 	}
 }

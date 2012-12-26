@@ -23,6 +23,8 @@ public class TileActionListener implements MouseListener{
 	@Autowired
 	private GridService gridService;
 	
+	private volatile boolean enabled = true;
+	
 	/** {@inheritDoc} */
 	@Override
 	public void mouseClicked(MouseEvent arg0) {
@@ -30,7 +32,7 @@ public class TileActionListener implements MouseListener{
 		log.debug(arg0.getSource().toString());
 		
 		Object source = arg0.getSource();
-		if(Tile.class.equals(source.getClass())){
+		if(enabled && Tile.class.equals(source.getClass())){
 			gridService.clicked((Tile)source);
 		}
 	}
@@ -59,4 +61,11 @@ public class TileActionListener implements MouseListener{
 		log.debug("Mouse released");
 	}
 
+	public void enable() {
+		this.enabled = true;
+	}
+
+	public void disable() {
+		this.enabled = false;
+	}
 }

@@ -13,7 +13,7 @@ import com.denisneuling.connectfour.common.Player;
  * @author ska
  * @version $Id: $Id
  */
-public class DecisionService {
+public class PlayerService {
 
 	private volatile Player a = new Player("Player 1", Color.BLUE);
 	private volatile Player b = new Player("Player 2", Color.RED);

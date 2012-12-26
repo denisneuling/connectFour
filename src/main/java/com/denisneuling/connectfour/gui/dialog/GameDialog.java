@@ -1,6 +1,8 @@
 package com.denisneuling.connectfour.gui.dialog;
 
 import java.awt.Dimension;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 
@@ -18,7 +20,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.denisneuling.connectfour.gui.MainFrame;
+import com.denisneuling.connectfour.gui.components.ConnectFourGrid;
 import com.denisneuling.connectfour.gui.components.MenuPanel;
+import com.denisneuling.connectfour.gui.components.listener.TileActionListener;
 
 /**
  * <p>NewDialog class.</p>
@@ -27,7 +31,7 @@ import com.denisneuling.connectfour.gui.components.MenuPanel;
  * @version $Id: $Id
  */
 @Component
-public class GameDialog extends JDialog implements WindowListener, InitializingBean {
+public class GameDialog extends JDialog implements WindowListener, ActionListener, InitializingBean {
 	private static final long serialVersionUID = 4621566363518596409L;
 	protected Logger log = Logger.getLogger(this.getClass());
 	
@@ -37,10 +41,19 @@ public class GameDialog extends JDialog implements WindowListener, InitializingB
 	@Autowired
 	private MainFrame mainFrame;
 	
+	@Autowired
+	private ConnectFourGrid connectFourGrid;
+	
+	@Autowired
+	private TileActionListener tileActionListener;
+	
 	private MigLayout layout;
 	
 	private JTextField xAxis;
 	private JTextField yAxis;
+	
+	private JButton okButton;
+	private JButton cancelButton;
 	
 	/**
 	 * <p>Constructor for GameDialog.</p>
@@ -56,7 +69,9 @@ public class GameDialog extends JDialog implements WindowListener, InitializingB
 		this.add(new JLabel("Length of Y Axis:"),   "");
 		
 		yAxis = new JTextField("5");
+		yAxis.setToolTipText("Has to be numeric");
 		xAxis = new JTextField("6");
+		xAxis.setToolTipText("Has to be numeric");
 		
 		this.add(yAxis,          "wrap");
 		this.add(new JLabel("Length of X Axis:"), "");
@@ -68,13 +83,15 @@ public class GameDialog extends JDialog implements WindowListener, InitializingB
 		JPanel buttonPanel = new JPanel(new MigLayout("fillx,insets 0"));
 
 		//Ok button
-		JButton okButton = new JButton("Ok");
+		okButton = new JButton("Ok");
 		okButton.setMnemonic('O');
+		okButton.addActionListener(this);
 		buttonPanel.add(okButton, "split,right,width 100!");
 
 		//Cancel button
-		JButton cancelButton = new JButton("Cancel");
+		cancelButton = new JButton("Cancel");
 		cancelButton.setMnemonic('C');
+		cancelButton.addActionListener(this);
 		buttonPanel.add(cancelButton, "width 100!");
 		
 		this.add(buttonPanel, "");
@@ -126,5 +143,38 @@ public class GameDialog extends JDialog implements WindowListener, InitializingB
 	@Override
 	public void afterPropertiesSet() throws Exception {
 		this.addWindowListener(this);
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent arg0) {
+		log.info(arg0.toString());
+		
+		if(okButton.equals(arg0.getSource())){
+			int intx, inty;
+			try{
+				String y = yAxis.getText();
+				inty = Integer.parseInt(y);
+			}catch(Exception e){
+				return;
+			}
+			
+			try{
+				String x = xAxis.getText();
+				intx = Integer.parseInt(x);
+			}catch(Exception e){
+				return;
+			}
+			
+			connectFourGrid.renew(intx,inty);
+			
+			tileActionListener.enable();
+			
+			this.setVisible(false);
+			menuPanel.enableItems();
+			
+		}else if(cancelButton.equals(arg0.getSource())){
+			this.setVisible(false);
+			menuPanel.enableItems();
+		}
 	}
 }

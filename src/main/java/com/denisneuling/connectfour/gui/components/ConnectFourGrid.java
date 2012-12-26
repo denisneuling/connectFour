@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
+import com.denisneuling.connectfour.gui.MainFrame;
 import com.denisneuling.connectfour.gui.components.listener.TileActionListener;
 import com.denisneuling.connectfour.service.GridService;
 
@@ -39,6 +40,9 @@ public class ConnectFourGrid extends JPanel implements InitializingBean {
 
 	@Autowired
 	private TileActionListener tileActionListener;
+	
+	@Autowired
+	private MainFrame mainFrame;
 
 	private volatile MigLayout layout;
 
@@ -93,22 +97,17 @@ public class ConnectFourGrid extends JPanel implements InitializingBean {
 		tileHorizontal = Integer.parseInt(defaultTileXString);
 		tileVertical = Integer.parseInt(defaultTileYString);
 
-		this.build();
+		this.renew(this.horizontal, this.vertical);
+		
 		this.setVisible(true);
 	}
 
-	/**
-	 * <p>clean.</p>
-	 */
-	public void clean() {
+	public void renew(int horizontal, int vertical) {
+		this.horizontal = horizontal;
+		this.vertical = vertical;
+		
 		this.removeAll();
-		gridService.clean();
-	}
-
-	/**
-	 * <p>build.</p>
-	 */
-	public void build() {
+		
 		gridService.build(horizontal, vertical);
 
 		layout = new MigLayout(String.format("wrap %d", horizontal));
@@ -122,13 +121,7 @@ public class ConnectFourGrid extends JPanel implements InitializingBean {
 				this.add(tile);
 			}
 		}
-	}
-
-	/**
-	 * <p>rebuild.</p>
-	 */
-	public void rebuild() {
-		clean();
-		build();
+		this.updateUI();
+		mainFrame.pack();
 	}
 }
