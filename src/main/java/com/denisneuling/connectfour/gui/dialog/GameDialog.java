@@ -1,4 +1,4 @@
-package com.denisneuling.connectfour.gui.components;
+package com.denisneuling.connectfour.gui.dialog;
 
 import java.awt.Dimension;
 import java.awt.event.WindowEvent;
@@ -18,6 +18,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.denisneuling.connectfour.gui.MainFrame;
+import com.denisneuling.connectfour.gui.components.MenuPanel;
 
 /**
  * <p>NewDialog class.</p>

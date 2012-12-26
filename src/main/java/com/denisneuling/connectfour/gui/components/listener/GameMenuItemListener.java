@@ -5,8 +5,8 @@ import java.awt.event.ActionEvent;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.denisneuling.connectfour.gui.components.GameDialog;
 import com.denisneuling.connectfour.gui.components.MenuPanel;
+import com.denisneuling.connectfour.gui.dialog.GameDialog;
 
 @Component
 /**

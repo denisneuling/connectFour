@@ -1,4 +1,4 @@
-package com.denisneuling.connectfour.gui.components;
+package com.denisneuling.connectfour.gui.dialog;
 
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;

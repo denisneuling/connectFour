@@ -12,6 +12,7 @@ import org.springframework.stereotype.Component;
 import com.denisneuling.connectfour.gui.MainFrame;
 import com.denisneuling.connectfour.gui.components.listener.GameMenuItemListener;
 import com.denisneuling.connectfour.gui.components.listener.QuitMenuItemListener;
+import com.denisneuling.connectfour.gui.dialog.GameDialog;
 
 @Component
 /**

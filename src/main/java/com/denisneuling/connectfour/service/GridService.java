@@ -10,7 +10,7 @@ import sun.net.www.content.text.plain;
 
 import com.denisneuling.connectfour.common.Player;
 import com.denisneuling.connectfour.gui.components.Tile;
-import com.denisneuling.connectfour.gui.components.WinDialog;
+import com.denisneuling.connectfour.gui.dialog.WinDialog;
 
 @Service
 /**
@@ -125,20 +125,19 @@ public class GridService {
 			}	
 		}
 		
-		// TODO still buggy
 		// diagonal right to left
 		for(int y = 0; y < matrix.length; y++){
 			for(int x = 0; x < matrix[y].length; x++){
 				if(		
-						x+1 < matrix[y].length && x+2 < matrix[y].length && x+3 < matrix[y].length 
+						x-1 >= 0 && x-2 >= 0 && x-3 >= 0 
 					&& 	y+1 < matrix.length && y+2 < matrix.length && y+3 < matrix.length
 				){
 					Player player = matrix[y][x].getPlayer(); 
 					if(
 							player != null
-							&&	player.equals(matrix[y+1][x+1].getPlayer()) 
-							&& 	player.equals(matrix[y+2][x+2].getPlayer())
-							&& 	player.equals(matrix[y+3][x+3].getPlayer())
+							&&	player.equals(matrix[y+1][x-1].getPlayer()) 
+							&& 	player.equals(matrix[y+2][x-2].getPlayer())
+							&& 	player.equals(matrix[y+3][x-3].getPlayer())
 							){
 						return player;
 					}
