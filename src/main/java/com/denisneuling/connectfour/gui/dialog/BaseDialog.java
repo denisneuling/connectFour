@@ -1,6 +1,9 @@
 package com.denisneuling.connectfour.gui.dialog;
 
 import java.awt.Point;
+import java.awt.event.ActionListener;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 
 import javax.swing.JDialog;
 
@@ -17,7 +20,7 @@ import com.denisneuling.connectfour.gui.MainFrame;
  * @author ska
  * @version $Id: $Id
  */
-public abstract class BaseDialog extends JDialog {
+public abstract class BaseDialog extends JDialog implements WindowListener, ActionListener{
 	protected Logger log = Logger.getLogger(this.getClass());
 	private static final long serialVersionUID = 2323710041837666035L;
 
@@ -33,5 +36,47 @@ public abstract class BaseDialog extends JDialog {
 		Point location = mainFrame.getLocation();
 		Point newLocation = new Point((int)location.getX()+40,(int)location.getY()+40);
 		this.setLocation(newLocation);
+	}
+	
+	/** {@inheritDoc} */
+	@Override
+	public void windowActivated(WindowEvent e) {
+		log.debug("Window activated.");
+	}
+
+	/** {@inheritDoc} */
+	@Override
+	public void windowClosed(WindowEvent e) {
+		log.debug("Window closed.");
+	}
+
+	/** {@inheritDoc} */
+	@Override
+	public void windowClosing(WindowEvent e) {
+		log.debug("Window closing.");
+	}
+
+	/** {@inheritDoc} */
+	@Override
+	public void windowDeactivated(WindowEvent e) {
+		log.debug("Window deactivated.");
+	}
+
+	/** {@inheritDoc} */
+	@Override
+	public void windowDeiconified(WindowEvent e) {
+		log.debug("Window deiconified.");
+	}
+
+	/** {@inheritDoc} */
+	@Override
+	public void windowIconified(WindowEvent e) {
+		log.debug("Window iconified.");
+	}
+
+	/** {@inheritDoc} */
+	@Override
+	public void windowOpened(WindowEvent e) {
+		log.debug("Window opened.");
 	}
 }

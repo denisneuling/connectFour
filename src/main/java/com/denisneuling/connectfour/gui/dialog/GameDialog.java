@@ -23,8 +23,10 @@ import com.denisneuling.connectfour.gui.components.MenuPanel;
 import com.denisneuling.connectfour.gui.components.listener.TileActionListener;
 
 /**
- * <p>NewDialog class.</p>
- *
+ * <p>
+ * NewDialog class.
+ * </p>
+ * 
  * @author ska
  * @version $Id: $Id
  */
@@ -32,76 +34,69 @@ import com.denisneuling.connectfour.gui.components.listener.TileActionListener;
 public class GameDialog extends BaseDialog implements WindowListener, ActionListener, InitializingBean {
 	private static final long serialVersionUID = 4621566363518596409L;
 	protected Logger log = Logger.getLogger(this.getClass());
-	
+
 	@Autowired
 	private MenuPanel menuPanel;
-	
+
 	@Autowired
 	private ConnectFourGrid connectFourGrid;
-	
+
 	@Autowired
 	private TileActionListener tileActionListener;
 	
+	@Autowired
+	private ErrorDialog errorDialog;
+
 	private MigLayout layout;
-	
+
 	private JTextField xAxis;
 	private JTextField yAxis;
-	
+
 	private JButton okButton;
 	private JButton cancelButton;
-	
+
 	/**
-	 * <p>Constructor for GameDialog.</p>
+	 * <p>
+	 * Constructor for GameDialog.
+	 * </p>
 	 */
-	public GameDialog(){
+	public GameDialog() {
 		this.setTitle("New Game");
-		this.setSize(new Dimension(350,125));
+		this.setSize(new Dimension(350, 125));
 		this.setResizable(false);
-		
+
 		layout = new MigLayout("fillx", "[right]rel[grow,fill]", "[]10[]");
 		this.setLayout(layout);
-		
-		this.add(new JLabel("Length of Y Axis:"),   "");
-		
+
+		this.add(new JLabel("Length of Y Axis:"), "");
+
 		yAxis = new JTextField("5");
 		yAxis.setToolTipText("Has to be numeric");
 		xAxis = new JTextField("6");
 		xAxis.setToolTipText("Has to be numeric");
-		
-		this.add(yAxis,          "wrap");
+
+		this.add(yAxis, "wrap");
 		this.add(new JLabel("Length of X Axis:"), "");
-		this.add(xAxis,          "wrap");
-		
+		this.add(xAxis, "wrap");
+
 		// TODO find workaround for better line feed
 		this.add(new JLabel(), "");
-		
+
 		JPanel buttonPanel = new JPanel(new MigLayout("fillx,insets 0"));
 
-		//Ok button
+		// Ok button
 		okButton = new JButton("Ok");
 		okButton.setMnemonic('O');
 		okButton.addActionListener(this);
 		buttonPanel.add(okButton, "split,right,width 100!");
 
-		//Cancel button
+		// Cancel button
 		cancelButton = new JButton("Cancel");
 		cancelButton.setMnemonic('C');
 		cancelButton.addActionListener(this);
 		buttonPanel.add(cancelButton, "width 100!");
-		
-		this.add(buttonPanel, "");
-	}
-	
-	/** {@inheritDoc} */
-	@Override
-	public void windowActivated(WindowEvent e) {
-		log.debug("Window activated");
-	}
 
-	/** {@inheritDoc} */
-	@Override
-	public void windowClosed(WindowEvent e) {
-		log.debug("Window closed");
+		this.add(buttonPanel, "");
 	}
 
 	/** {@inheritDoc} */
@@ -112,27 +107,9 @@ public class GameDialog extends BaseDialog implements WindowListener, ActionList
 
 	/** {@inheritDoc} */
 	@Override
-	public void windowDeactivated(WindowEvent e) {
-		log.debug("Window deactivated");
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public void windowDeiconified(WindowEvent e) {
-		log.debug("Window deiconified");
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public void windowIconified(WindowEvent e) {
-		log.debug("Window iconified");
-	}
-
-	/** {@inheritDoc} */
-	@Override
 	public void windowOpened(WindowEvent e) {
 		log.debug("Window opened");
-		
+
 		relocate();
 	}
 
@@ -146,31 +123,42 @@ public class GameDialog extends BaseDialog implements WindowListener, ActionList
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
 		log.debug(arg0.toString());
-		
-		if(okButton.equals(arg0.getSource())){
+
+		if (okButton.equals(arg0.getSource())) {
 			int intx, inty;
-			try{
+			try {
 				String y = yAxis.getText();
 				inty = Integer.parseInt(y);
-			}catch(Exception e){
-				return;
+			} catch (Exception e) {
+				errorDialog.showNewGameError();
+				throw new RuntimeException("Invalid Y value");
 			}
-			
-			try{
+
+			try {
 				String x = xAxis.getText();
 				intx = Integer.parseInt(x);
-			}catch(Exception e){
-				return;
+			} catch (Exception e) {
+				errorDialog.showNewGameError();
+				throw new RuntimeException("Invalid X value");
 			}
-			
-			connectFourGrid.renew(intx,inty);
-			
+
+			if (intx > 10 || intx < 6) {
+				errorDialog.showNewGameError();
+				throw new RuntimeException("Invalid X bounds");
+			}
+			if (inty > 8 || inty < 5) {
+				errorDialog.showNewGameError();
+				throw new RuntimeException("Invalid Y bounds");
+			}
+
+			connectFourGrid.renew(intx, inty);
+
 			tileActionListener.enable();
-			
+
 			this.setVisible(false);
 			menuPanel.enableItems();
-			
-		}else if(cancelButton.equals(arg0.getSource())){
+
+		} else if (cancelButton.equals(arg0.getSource())) {
 			this.setVisible(false);
 			menuPanel.enableItems();
 		}

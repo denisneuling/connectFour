@@ -3,7 +3,6 @@ package com.denisneuling.connectfour.gui.dialog;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 
 import javax.swing.JButton;
@@ -36,55 +35,7 @@ public class WinDialog extends BaseDialog implements WindowListener, ActionListe
 	private MigLayout layout;
 	private JButton okButton;
 	private JLabel label;
-	
-	/** {@inheritDoc} */
-	@Override
-	public void windowActivated(WindowEvent e) {
-		log.debug("Window activated");
-	}
 
-	/** {@inheritDoc} */
-	@Override
-	public void windowClosed(WindowEvent e) {
-		log.debug("Window closed");
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public void windowClosing(WindowEvent e) {
-		log.debug("Window closed");
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public void windowDeactivated(WindowEvent e) {
-		log.debug("Window deactivated");
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public void windowDeiconified(WindowEvent e) {
-		log.debug("Window deiconified");
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public void windowIconified(WindowEvent e) {
-		log.debug("Window iconified");
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public void windowOpened(WindowEvent e) {
-		log.debug("Window opened");
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public void afterPropertiesSet() throws Exception {
-		this.addWindowListener(this);
-	}
-	
 	/**
 	 * <p>Constructor for WinDialog.</p>
 	 */
@@ -138,12 +89,18 @@ public class WinDialog extends BaseDialog implements WindowListener, ActionListe
 		this.repaint();
 		this.setVisible(true);
 	}
-
+	
 	/** {@inheritDoc} */
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
 		this.setVisible(false);
 		
 		gameDialog.setVisible(true);
+	}
+	
+	/** {@inheritDoc} */
+	@Override
+	public void afterPropertiesSet() throws Exception {
+		this.addWindowListener(this);
 	}
 }

@@ -51,7 +51,7 @@ public class ConnectFourGrid extends JPanel implements InitializingBean {
 	
 	@Autowired
 	private PlayerService playerService;
-
+	
 	private volatile MigLayout layout;
 
 	private volatile int horizontal;

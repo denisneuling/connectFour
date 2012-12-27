@@ -89,41 +89,11 @@ public class PlayerDialog extends BaseDialog implements WindowListener, ActionLi
 		
 		this.add(buttonPanel, "");
 	}
-	
-	/** {@inheritDoc} */
-	@Override
-	public void windowActivated(WindowEvent e) {
-		log.debug("Window activated");
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public void windowClosed(WindowEvent e) {
-		log.debug("Window closed");
-	}
 
 	/** {@inheritDoc} */
 	@Override
 	public void windowClosing(WindowEvent e) {
 		menuPanel.enableItems();
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public void windowDeactivated(WindowEvent e) {
-		log.debug("Window deactivated");
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public void windowDeiconified(WindowEvent e) {
-		log.debug("Window deiconified");
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public void windowIconified(WindowEvent e) {
-		log.debug("Window iconified");
 	}
 
 	/** {@inheritDoc} */

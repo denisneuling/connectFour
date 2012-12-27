@@ -59,7 +59,6 @@ public class GridService {
 			
 			matrix[tile.getRow()][tile.getColumn()] = tile;
 		}
-
 	}
 
 	/**
@@ -74,8 +73,8 @@ public class GridService {
 
 		for (int i = 0; i < matrix[tile.getRow()].length; i++) {
 			if (matrix[tile.getRow()][i].getPlayer() == null) {
-				log.info(tile.getRow() + " " + matrix[tile.getRow()][i] + " " + matrix[tile.getRow()][i].getPlayer());
 				Player player = playerService.getCurrentPlayer();
+				log.debug("Using row{"+tile.getRow() + "} -> {" + matrix[tile.getRow()][i] + "}, player {" + player + "}");
 				matrix[tile.getRow()][i].setPlayer(player);
 				matrix[tile.getRow()][i].setBackground(player.getColor());
 				valid = true;
