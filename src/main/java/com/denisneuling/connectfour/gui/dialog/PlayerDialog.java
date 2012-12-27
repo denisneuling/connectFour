@@ -24,6 +24,12 @@ import com.denisneuling.connectfour.gui.components.MessagePane;
 import com.denisneuling.connectfour.service.PlayerService;
 
 @Component
+/**
+ * <p>PlayerDialog class.</p>
+ *
+ * @author ska
+ * @version $Id: $Id
+ */
 public class PlayerDialog extends BaseDialog implements WindowListener, ActionListener, InitializingBean {
 	private static final long serialVersionUID = 4621566363518596409L;
 	protected Logger log = Logger.getLogger(this.getClass());

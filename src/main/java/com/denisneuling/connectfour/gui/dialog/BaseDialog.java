@@ -11,6 +11,12 @@ import org.springframework.stereotype.Component;
 import com.denisneuling.connectfour.gui.MainFrame;
 
 @Component
+/**
+ * <p>Abstract BaseDialog class.</p>
+ *
+ * @author ska
+ * @version $Id: $Id
+ */
 public abstract class BaseDialog extends JDialog {
 	protected Logger log = Logger.getLogger(this.getClass());
 	private static final long serialVersionUID = 2323710041837666035L;
@@ -18,6 +24,9 @@ public abstract class BaseDialog extends JDialog {
 	@Autowired
 	protected MainFrame mainFrame;
 	
+	/**
+	 * <p>relocate.</p>
+	 */
 	public void relocate(){
 		log.debug("Relocation.");
 		

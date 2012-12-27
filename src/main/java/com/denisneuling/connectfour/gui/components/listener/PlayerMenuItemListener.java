@@ -8,6 +8,12 @@ import org.springframework.stereotype.Component;
 import com.denisneuling.connectfour.gui.dialog.PlayerDialog;
 
 @Component
+/**
+ * <p>PlayerMenuItemListener class.</p>
+ *
+ * @author ska
+ * @version $Id: $Id
+ */
 public class PlayerMenuItemListener extends BaseMenuItemListener{
 
 	@Autowired
