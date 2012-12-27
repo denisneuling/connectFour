@@ -28,6 +28,7 @@ public class GameMenuItemListener extends BaseMenuItemListener{
 	public void actionPerformed(ActionEvent e) {
 		menuPanel.disableItems();
 		
+		gameDialog.relocate();
 		gameDialog.setVisible(true);
 	}
 }

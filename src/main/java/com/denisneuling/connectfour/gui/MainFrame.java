@@ -5,6 +5,8 @@ import java.awt.event.WindowListener;
 
 import javax.swing.JFrame;
 
+import net.miginfocom.swing.MigLayout;
+
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +16,8 @@ import org.springframework.stereotype.Component;
 
 import com.denisneuling.connectfour.gui.components.ConnectFourGrid;
 import com.denisneuling.connectfour.gui.components.MenuPanel;
+import com.denisneuling.connectfour.gui.components.MessagePane;
+import com.denisneuling.connectfour.service.PlayerService;
 
 /**
  * <p>MainFrame class.</p>
@@ -34,6 +38,12 @@ public class MainFrame extends JFrame implements InitializingBean, WindowListene
 	
 	@Autowired
 	private ConnectFourGrid connectFourGrid;
+	
+	@Autowired
+	private MessagePane messagePane;
+	
+	@Autowired
+	private PlayerService playerService;
 	
 	/**
 	 * <p>Constructor for MainFrame.</p>
@@ -67,8 +77,14 @@ public class MainFrame extends JFrame implements InitializingBean, WindowListene
 	public void afterPropertiesSet() throws Exception {
 		setJMenuBar(menuPanel);
 		
-		this.getContentPane().add(connectFourGrid);
+		MigLayout layout = new MigLayout();
 		
+		this.getContentPane().setLayout(layout);
+		this.getContentPane().add(connectFourGrid, "north, grow");
+		this.getContentPane().add(messagePane, "south, grow");
+		
+		messagePane.setYourTurn(playerService.getCurrentPlayer());
+
 		this.pack();
 		this.setVisible(true);
 	}

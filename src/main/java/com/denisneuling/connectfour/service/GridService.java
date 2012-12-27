@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.denisneuling.connectfour.common.Player;
+import com.denisneuling.connectfour.gui.components.MessagePane;
 import com.denisneuling.connectfour.gui.components.Tile;
 import com.denisneuling.connectfour.gui.components.listener.TileActionListener;
 import com.denisneuling.connectfour.gui.dialog.WinDialog;
@@ -21,6 +22,9 @@ public class GridService {
 
 	@Autowired
 	private PlayerService playerService;
+	
+	@Autowired
+	private MessagePane messagePane;
 	
 	@Autowired
 	private WinDialog winDialog;
@@ -64,7 +68,8 @@ public class GridService {
 	 * @param tile a {@link com.denisneuling.connectfour.gui.components.Tile} object.
 	 */
 	public void clicked(Tile tile) {
-		log.info(tile);
+		log.debug(tile);
+		
 		boolean valid = false;
 
 		for (int i = 0; i < matrix[tile.getRow()].length; i++) {
@@ -84,11 +89,15 @@ public class GridService {
 			if (winner == null) {
 				
 				if(clickCount >= tiles){
+					winDialog.relocate();
 					winDialog.notifyWinner(null);
 				}else{
-					playerService.nextPlayer();
+					Player player = playerService.getNextPlayer();
+					playerService.setCurrentPlayer(player);
+					messagePane.setYourTurn(player);
 				}
 			} else {
+				messagePane.clean();
 				tileActionListener.disable();
 				winDialog.notifyWinner(winner);
 			}

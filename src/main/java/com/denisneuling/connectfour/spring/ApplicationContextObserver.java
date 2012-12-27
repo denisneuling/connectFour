@@ -19,7 +19,6 @@ import org.springframework.context.event.ContextRefreshedEvent;
  */
 @SuppressWarnings("rawtypes")
 public class ApplicationContextObserver extends Observable implements BeanPostProcessor, ApplicationContextAware, ApplicationListener {
-
 	private final Logger log = Logger.getLogger(this.getClass());
 	private static ApplicationContextObserver INSTANCE;
 	private volatile boolean refreshed = false;
@@ -47,7 +46,7 @@ public class ApplicationContextObserver extends Observable implements BeanPostPr
 	/** {@inheritDoc} */
 	@Override
 	public Object postProcessAfterInitialization(Object bean, String beanName) throws BeansException {
-		log.info(String.format("On %s Bean {%s} initialized.", applicationContext.getDisplayName(), beanName));
+		log.debug(String.format("On %s Bean {%s} initialized.", applicationContext.getDisplayName(), beanName));
 		
 		this.setChanged();
 		this.notifyObservers(new ContextEvent(beanName));

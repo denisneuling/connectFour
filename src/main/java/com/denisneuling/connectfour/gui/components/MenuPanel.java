@@ -11,8 +11,10 @@ import org.springframework.stereotype.Component;
 
 import com.denisneuling.connectfour.gui.MainFrame;
 import com.denisneuling.connectfour.gui.components.listener.GameMenuItemListener;
+import com.denisneuling.connectfour.gui.components.listener.PlayerMenuItemListener;
 import com.denisneuling.connectfour.gui.components.listener.QuitMenuItemListener;
 import com.denisneuling.connectfour.gui.dialog.GameDialog;
+import com.denisneuling.connectfour.gui.dialog.PlayerDialog;
 
 @Component
 /**
@@ -32,7 +34,13 @@ public class MenuPanel extends JMenuBar implements InitializingBean {
 	private GameDialog gameDialog;
 	
 	@Autowired
+	private PlayerDialog playerDialog;
+	
+	@Autowired
 	private GameMenuItemListener gameMenuItemListener;
+	
+	@Autowired
+	private PlayerMenuItemListener playerMenuItemListener;
 	
 	@Autowired
 	private QuitMenuItemListener quitMenuItemListener;
@@ -40,6 +48,7 @@ public class MenuPanel extends JMenuBar implements InitializingBean {
 	private JMenu jMenu;
 	private JMenuItem quitItem;
 	private JMenuItem gameItem;
+	private JMenuItem playerItem;
 	
 	/**
 	 * <p>Constructor for MenuPanel.</p>
@@ -58,8 +67,11 @@ public class MenuPanel extends JMenuBar implements InitializingBean {
 		quitItem.addActionListener(quitMenuItemListener);
 		gameItem = new JMenuItem("New Game");
 		gameItem.addActionListener(gameMenuItemListener);
+		playerItem = new JMenuItem("Player options");
+		playerItem.addActionListener(playerMenuItemListener);
 		
 		jMenu.add(gameItem);
+		jMenu.add(playerItem);
 		jMenu.add(quitItem);
 		this.add(jMenu);
 		

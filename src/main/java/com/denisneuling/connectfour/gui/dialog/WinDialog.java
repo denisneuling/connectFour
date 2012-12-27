@@ -7,7 +7,6 @@ import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 
 import javax.swing.JButton;
-import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
@@ -19,7 +18,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.denisneuling.connectfour.common.Player;
-import com.denisneuling.connectfour.gui.MainFrame;
 
 @Component
 /**
@@ -28,19 +26,16 @@ import com.denisneuling.connectfour.gui.MainFrame;
  * @author ska
  * @version $Id: $Id
  */
-public class WinDialog extends JDialog implements WindowListener, ActionListener, InitializingBean {
+public class WinDialog extends BaseDialog implements WindowListener, ActionListener, InitializingBean {
 	private static final long serialVersionUID = 4621566363518596409L;
 	protected Logger log = Logger.getLogger(this.getClass());
-	
-	@Autowired
-	private MainFrame mainFrame;
 	
 	@Autowired
 	private GameDialog gameDialog;
 	
 	private MigLayout layout;
-	
 	private JButton okButton;
+	private JLabel label;
 	
 	/** {@inheritDoc} */
 	@Override
@@ -94,8 +89,31 @@ public class WinDialog extends JDialog implements WindowListener, ActionListener
 	 * <p>Constructor for WinDialog.</p>
 	 */
 	public WinDialog(){
+		this.setSize(new Dimension(350,150));
+		this.setResizable(false);
+		
 		setLayout(new MigLayout("fill"));
+		
 		this.setLayout(layout);
+		
+		layout = new MigLayout("fillx", "[right]rel[grow,fill]", "[]10[]");
+		this.setLayout(layout);
+		
+		label = new JLabel();
+		this.add(label,   "");
+		
+		// TODO find workaround for better line feed
+		this.add(new JLabel(), "");
+		
+		JPanel buttonPanel = new JPanel(new MigLayout("fillx,insets 0"));
+
+		//Ok button
+		okButton = new JButton("Ok");
+		okButton.setMnemonic('O');
+		okButton.addActionListener(this);
+		buttonPanel.add(okButton, "split,right,width 100!");
+
+		this.add(buttonPanel, "span");
 	}
 	
 	/**
@@ -115,21 +133,9 @@ public class WinDialog extends JDialog implements WindowListener, ActionListener
 			content = "<html><h1>Congratulations!</h1><br>"+player.getName()+"<br>has beaten you in this match.<br></html>";
 		}
 		
-		JLabel text = new JLabel();
-		text.setText(content);
-		this.add(text);
+		label.setText(content);
 		
-		JPanel buttonPanel = new JPanel(new MigLayout("fillx,insets 0"));
-		
-		//Ok button
-		okButton = new JButton("Ok");
-		okButton.setMnemonic('O');
-		okButton.addActionListener(this);
-		buttonPanel.add(okButton, "split,right,width 100!");
-		this.add(buttonPanel, "");
-		
-		this.setSize(new Dimension(350,125));
-		this.setResizable(false);
+		this.repaint();
 		this.setVisible(true);
 	}
 

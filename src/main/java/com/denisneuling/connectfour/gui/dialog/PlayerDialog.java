@@ -18,18 +18,13 @@ import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.denisneuling.connectfour.gui.components.ConnectFourGrid;
+import com.denisneuling.connectfour.common.Player;
 import com.denisneuling.connectfour.gui.components.MenuPanel;
-import com.denisneuling.connectfour.gui.components.listener.TileActionListener;
+import com.denisneuling.connectfour.gui.components.MessagePane;
+import com.denisneuling.connectfour.service.PlayerService;
 
-/**
- * <p>NewDialog class.</p>
- *
- * @author ska
- * @version $Id: $Id
- */
 @Component
-public class GameDialog extends BaseDialog implements WindowListener, ActionListener, InitializingBean {
+public class PlayerDialog extends BaseDialog implements WindowListener, ActionListener, InitializingBean {
 	private static final long serialVersionUID = 4621566363518596409L;
 	protected Logger log = Logger.getLogger(this.getClass());
 	
@@ -37,15 +32,15 @@ public class GameDialog extends BaseDialog implements WindowListener, ActionList
 	private MenuPanel menuPanel;
 	
 	@Autowired
-	private ConnectFourGrid connectFourGrid;
+	private PlayerService playerService;
 	
 	@Autowired
-	private TileActionListener tileActionListener;
+	private MessagePane messgaePane;
 	
 	private MigLayout layout;
 	
-	private JTextField xAxis;
-	private JTextField yAxis;
+	private JTextField player1;
+	private JTextField player2;
 	
 	private JButton okButton;
 	private JButton cancelButton;
@@ -53,24 +48,21 @@ public class GameDialog extends BaseDialog implements WindowListener, ActionList
 	/**
 	 * <p>Constructor for GameDialog.</p>
 	 */
-	public GameDialog(){
-		this.setTitle("New Game");
+	public PlayerDialog(){
+		this.setTitle("Player options");
 		this.setSize(new Dimension(350,125));
 		this.setResizable(false);
 		
 		layout = new MigLayout("fillx", "[right]rel[grow,fill]", "[]10[]");
 		this.setLayout(layout);
 		
-		this.add(new JLabel("Length of Y Axis:"),   "");
+		this.add(new JLabel("Name of player 1:"),   "");
+		player1 = new JTextField();
+		this.add(player1,          "wrap");
 		
-		yAxis = new JTextField("5");
-		yAxis.setToolTipText("Has to be numeric");
-		xAxis = new JTextField("6");
-		xAxis.setToolTipText("Has to be numeric");
-		
-		this.add(yAxis,          "wrap");
-		this.add(new JLabel("Length of X Axis:"), "");
-		this.add(xAxis,          "wrap");
+		this.add(new JLabel("Name of player 2:"), "");
+		player2 = new JTextField();
+		this.add(player2,          "wrap");
 		
 		// TODO find workaround for better line feed
 		this.add(new JLabel(), "");
@@ -134,6 +126,9 @@ public class GameDialog extends BaseDialog implements WindowListener, ActionList
 		log.debug("Window opened");
 		
 		relocate();
+		
+		player1.setText(playerService.getPlayer1().getName());
+		player2.setText(playerService.getPlayer2().getName());
 	}
 
 	/** {@inheritDoc} */
@@ -145,34 +140,23 @@ public class GameDialog extends BaseDialog implements WindowListener, ActionList
 	/** {@inheritDoc} */
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
-		log.debug(arg0.toString());
+		log.info(arg0.toString());
 		
 		if(okButton.equals(arg0.getSource())){
-			int intx, inty;
-			try{
-				String y = yAxis.getText();
-				inty = Integer.parseInt(y);
-			}catch(Exception e){
-				return;
-			}
 			
-			try{
-				String x = xAxis.getText();
-				intx = Integer.parseInt(x);
-			}catch(Exception e){
-				return;
-			}
+			String player1Name = player1.getText();
+			String player2Name = player2.getText();
 			
-			connectFourGrid.renew(intx,inty);
+			playerService.getPlayer1().setName(player1Name);
+			playerService.getPlayer2().setName(player2Name);
 			
-			tileActionListener.enable();
+			
+			Player currentPlayer = playerService.getCurrentPlayer();
+			messgaePane.setYourTurn(currentPlayer);
 			
 			this.setVisible(false);
-			menuPanel.enableItems();
-			
 		}else if(cancelButton.equals(arg0.getSource())){
 			this.setVisible(false);
-			menuPanel.enableItems();
 		}
 	}
 }

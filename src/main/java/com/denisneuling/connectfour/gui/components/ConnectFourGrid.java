@@ -9,9 +9,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
+import com.denisneuling.connectfour.common.Player;
 import com.denisneuling.connectfour.gui.MainFrame;
 import com.denisneuling.connectfour.gui.components.listener.TileActionListener;
 import com.denisneuling.connectfour.service.GridService;
+import com.denisneuling.connectfour.service.PlayerService;
 
 @Component
 /**
@@ -43,6 +45,12 @@ public class ConnectFourGrid extends JPanel implements InitializingBean {
 	
 	@Autowired
 	private MainFrame mainFrame;
+	
+	@Autowired
+	private MessagePane messagePane;
+	
+	@Autowired
+	private PlayerService playerService;
 
 	private volatile MigLayout layout;
 
@@ -111,7 +119,7 @@ public class ConnectFourGrid extends JPanel implements InitializingBean {
 	public void renew(int horizontal, int vertical) {
 		this.horizontal = horizontal;
 		this.vertical = vertical;
-		
+
 		this.removeAll();
 		
 		gridService.build(horizontal, vertical);
@@ -127,7 +135,12 @@ public class ConnectFourGrid extends JPanel implements InitializingBean {
 				this.add(tile);
 			}
 		}
+		
 		this.updateUI();
+		
+		Player player = playerService.getCurrentPlayer();
+		messagePane.setYourTurn(player);
+		
 		mainFrame.pack();
 	}
 }
