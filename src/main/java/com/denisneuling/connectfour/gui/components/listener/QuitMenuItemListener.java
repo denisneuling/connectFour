@@ -11,8 +11,8 @@ import com.denisneuling.connectfour.gui.MainFrame;
 /**
  * <p>QuitMenuItemListener class.</p>
  *
- * @author ska
- * @version $Id: $Id
+ * @author Denis Neuling (denisneuling@gmail.com)
+ * 
  */
 public class QuitMenuItemListener extends BaseMenuItemListener {
 

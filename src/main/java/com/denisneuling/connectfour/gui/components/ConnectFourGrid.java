@@ -19,8 +19,8 @@ import com.denisneuling.connectfour.service.PlayerService;
 /**
  * <p>ConnectFourGrid class.</p>
  *
- * @author ska
- * @version $Id: $Id
+ * @author Denis Neuling (denisneuling@gmail.com)
+ * 
  */
 public class ConnectFourGrid extends JPanel implements InitializingBean {
 	private static final long serialVersionUID = 4883973788405021695L;

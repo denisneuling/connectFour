@@ -8,8 +8,8 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
  * ApplicationContextLoader class.
  * </p>
  *
- * @author ska
- * @version $Id: $Id
+ * @author Denis Neuling (denisneuling@gmail.com)
+ * 
  */
 public class ApplicationContextLoader {
 

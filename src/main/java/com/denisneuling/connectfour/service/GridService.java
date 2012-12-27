@@ -14,8 +14,8 @@ import com.denisneuling.connectfour.gui.dialog.WinDialog;
 /**
  * <p>GridService class.</p>
  *
- * @author ska
- * @version $Id: $Id
+ * @author Denis Neuling (denisneuling@gmail.com)
+ * 
  */
 public class GridService {
 	protected Logger log = Logger.getLogger(this.getClass());

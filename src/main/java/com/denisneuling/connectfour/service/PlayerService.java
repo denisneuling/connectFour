@@ -12,8 +12,8 @@ import com.denisneuling.connectfour.gui.components.MessagePane;
 /**
  * <p>PlayerService class.</p>
  *
- * @author ska
- * @version $Id: $Id
+ * @author Denis Neuling (denisneuling@gmail.com)
+ * 
  */
 public class PlayerService {
 

@@ -27,8 +27,8 @@ import com.denisneuling.connectfour.gui.components.listener.TileActionListener;
  * NewDialog class.
  * </p>
  * 
- * @author ska
- * @version $Id: $Id
+ * @author Denis Neuling (denisneuling@gmail.com)
+ * 
  */
 @Component
 public class GameDialog extends BaseDialog implements WindowListener, ActionListener, InitializingBean {

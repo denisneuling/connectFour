@@ -10,8 +10,8 @@ import org.springframework.stereotype.Component;
 /**
  * <p>BaseMenuItemListener class.</p>
  *
- * @author ska
- * @version $Id: $Id
+ * @author Denis Neuling (denisneuling@gmail.com)
+ * 
  */
 public class BaseMenuItemListener implements ActionListener{
 	protected Logger log = Logger.getLogger(this.getClass());

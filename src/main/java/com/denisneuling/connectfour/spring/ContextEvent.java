@@ -4,8 +4,8 @@ package com.denisneuling.connectfour.spring;
 /**
  * <p>ContextEvent class.</p>
  *
- * @author ska
- * @version $Id: $Id
+ * @author Denis Neuling (denisneuling@gmail.com)
+ * 
  */
 public class ContextEvent {
 

@@ -11,8 +11,8 @@ import com.denisneuling.connectfour.gui.dialog.PlayerDialog;
 /**
  * <p>PlayerMenuItemListener class.</p>
  *
- * @author ska
- * @version $Id: $Id
+ * @author Denis Neuling (denisneuling@gmail.com)
+ * 
  */
 public class PlayerMenuItemListener extends BaseMenuItemListener{
 

@@ -20,8 +20,8 @@ import com.denisneuling.connectfour.gui.dialog.PlayerDialog;
 /**
  * <p>MenuPanel class.</p>
  *
- * @author ska
- * @version $Id: $Id
+ * @author Denis Neuling (denisneuling@gmail.com)
+ * 
  */
 public class MenuPanel extends JMenuBar implements InitializingBean {
 	private static final long serialVersionUID = -8033351688374778735L;

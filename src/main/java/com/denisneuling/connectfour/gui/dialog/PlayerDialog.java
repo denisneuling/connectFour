@@ -27,8 +27,8 @@ import com.denisneuling.connectfour.service.PlayerService;
 /**
  * <p>PlayerDialog class.</p>
  *
- * @author ska
- * @version $Id: $Id
+ * @author Denis Neuling (denisneuling@gmail.com)
+ * 
  */
 public class PlayerDialog extends BaseDialog implements WindowListener, ActionListener, InitializingBean {
 	private static final long serialVersionUID = 4621566363518596409L;

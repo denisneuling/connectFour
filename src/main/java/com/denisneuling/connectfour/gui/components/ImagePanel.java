@@ -8,8 +8,8 @@ import javax.swing.JPanel;
 /**
  * <p>ImagePanel class.</p>
  *
- * @author ska
- * @version $Id: $Id
+ * @author Denis Neuling (denisneuling@gmail.com)
+ * 
  */
 public class ImagePanel extends JPanel {
 	private static final long serialVersionUID = 3104257036081096846L;

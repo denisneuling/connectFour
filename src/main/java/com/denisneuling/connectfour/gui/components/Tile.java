@@ -11,8 +11,8 @@ import com.denisneuling.connectfour.common.Player;
 /**
  * <p>Tile class.</p>
  *
- * @author ska
- * @version $Id: $Id
+ * @author Denis Neuling (denisneuling@gmail.com)
+ * 
  */
 public class Tile extends JPanel{
 	private static final long serialVersionUID = -7889536270698819018L;

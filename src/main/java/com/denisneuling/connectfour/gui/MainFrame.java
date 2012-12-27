@@ -22,8 +22,8 @@ import com.denisneuling.connectfour.service.PlayerService;
 /**
  * <p>MainFrame class.</p>
  *
- * @author ska
- * @version $Id: $Id
+ * @author Denis Neuling (denisneuling@gmail.com)
+ * 
  */
 @Component
 public class MainFrame extends JFrame implements InitializingBean, WindowListener{

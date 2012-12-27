@@ -14,8 +14,8 @@ import org.springframework.context.event.ContextRefreshedEvent;
 /**
  * <p>ApplicationContextObserver class.</p>
  *
- * @author ska
- * @version $Id: $Id
+ * @author Denis Neuling (denisneuling@gmail.com)
+ * 
  */
 @SuppressWarnings("rawtypes")
 public class ApplicationContextObserver extends Observable implements BeanPostProcessor, ApplicationContextAware, ApplicationListener {

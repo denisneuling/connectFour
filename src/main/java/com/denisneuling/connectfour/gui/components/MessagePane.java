@@ -11,8 +11,8 @@ import com.denisneuling.connectfour.common.Player;
 /**
  * <p>MessagePane class.</p>
  *
- * @author ska
- * @version $Id: $Id
+ * @author Denis Neuling (denisneuling@gmail.com)
+ * 
  */
 public class MessagePane extends JLabel implements InitializingBean{
 	private static final long serialVersionUID = -942672230228625804L;

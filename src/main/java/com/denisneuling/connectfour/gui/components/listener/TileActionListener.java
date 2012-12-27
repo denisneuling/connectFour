@@ -14,8 +14,8 @@ import com.denisneuling.connectfour.service.GridService;
 /**
  * <p>TileActionListener class.</p>
  *
- * @author ska
- * @version $Id: $Id
+ * @author Denis Neuling (denisneuling@gmail.com)
+ * 
  */
 public class TileActionListener implements MouseListener{
 	Logger log = Logger.getLogger(this.getClass());

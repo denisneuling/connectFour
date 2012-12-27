@@ -17,8 +17,8 @@ import com.denisneuling.connectfour.gui.MainFrame;
 /**
  * <p>Abstract BaseDialog class.</p>
  *
- * @author ska
- * @version $Id: $Id
+ * @author Denis Neuling (denisneuling@gmail.com)
+ * 
  */
 public abstract class BaseDialog extends JDialog implements WindowListener, ActionListener{
 	protected Logger log = Logger.getLogger(this.getClass());
