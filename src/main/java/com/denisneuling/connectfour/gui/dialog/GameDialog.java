@@ -26,7 +26,7 @@ import com.denisneuling.connectfour.gui.components.listener.TileActionListener;
  * <p>
  * NewDialog class.
  * </p>
- * 
+ *
  * @author Denis Neuling (denisneuling@gmail.com)
  * 
  */
